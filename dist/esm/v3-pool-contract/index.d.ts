@@ -9,7 +9,7 @@ import { SynthetixInterface } from '../synthetix-contract';
 import { L2PoolInterface } from '../v3-pool-rollups';
 import { WETHGatewayInterface } from '../wethgateway-contract';
 import { LPBorrowParamsType, LPSupplyParamsType, LPFlashLiquidation, LPLiquidationCall, LPParaswapRepayWithCollateral, LPRepayParamsType, LPRepayWithATokensType, LPRepayWithPermitParamsType, LPSetUsageAsCollateral, LPSetUserEModeType, LPSignERC20ApprovalType, LPSupplyWithPermitType, LPSwapBorrowRateMode, LPSwapCollateral, LPWithdrawParamsType, LPV3MigrationParamsType } from './lendingPoolTypes';
-import { IPool } from './typechain/IPool';
+import { Pool as IPool } from '../types/Pool';
 export interface PoolInterface {
     deposit: (args: LPSupplyParamsType) => Promise<EthereumTransactionTypeExtended[]>;
     supply: (args: LPSupplyParamsType) => Promise<EthereumTransactionTypeExtended[]>;

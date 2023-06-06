@@ -72,8 +72,8 @@ import {
   LPWithdrawParamsType,
   LPV3MigrationParamsType,
 } from './lendingPoolTypes';
-import { IPool } from './typechain/IPool';
-import { IPool__factory } from './typechain/IPool__factory';
+import { Pool as IPool } from '../types/Pool';
+import { Pool__factory as IPool__factory } from '../types/factories/Pool__factory';
 
 export interface PoolInterface {
   deposit: (
@@ -1499,7 +1499,7 @@ export class Pool extends BaseService<IPool> implements PoolInterface {
 
     const txCallback: () => Promise<transactionType> = this.generateTxCallback({
       rawTxMethod: async () =>
-        populateTransaction.repayWithATokens(
+        populateTransaction.repayWithHTokens(
           reserve,
           convertedAmount,
           numericRateMode,

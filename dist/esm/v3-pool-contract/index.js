@@ -13,7 +13,7 @@ import { ParaswapRepayWithCollateral, } from '../paraswap-repayWithCollateralAda
 import { SynthetixService } from '../synthetix-contract';
 import { L2Pool } from '../v3-pool-rollups';
 import { WETHGatewayService, } from '../wethgateway-contract';
-import { IPool__factory } from './typechain/IPool__factory';
+import { Pool__factory as IPool__factory } from '../types/factories/Pool__factory';
 const buildParaSwapLiquiditySwapParams = (assetToSwapTo, minAmountToReceive, swapAllBalanceOffset, swapCalldata, augustus, permitAmount, deadline, v, r, s) => {
     return utils.defaultAbiCoder.encode([
         'address',
@@ -743,7 +743,7 @@ export class Pool extends BaseService {
             }, txs);
         }
         const txCallback = this.generateTxCallback({
-            rawTxMethod: async () => populateTransaction.repayWithATokens(reserve, convertedAmount, numericRateMode),
+            rawTxMethod: async () => populateTransaction.repayWithHTokens(reserve, convertedAmount, numericRateMode),
             from: user,
             value: getTxValue(reserve, convertedAmount),
         });

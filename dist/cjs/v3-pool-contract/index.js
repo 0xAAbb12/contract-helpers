@@ -16,7 +16,7 @@ const paraswap_repayWithCollateralAdapter_contract_1 = require("../paraswap-repa
 const synthetix_contract_1 = require("../synthetix-contract");
 const v3_pool_rollups_1 = require("../v3-pool-rollups");
 const wethgateway_contract_1 = require("../wethgateway-contract");
-const IPool__factory_1 = require("./typechain/IPool__factory");
+const Pool__factory_1 = require("../types/factories/Pool__factory");
 const buildParaSwapLiquiditySwapParams = (assetToSwapTo, minAmountToReceive, swapAllBalanceOffset, swapCalldata, augustus, permitAmount, deadline, v, r, s) => {
     return ethers_1.utils.defaultAbiCoder.encode([
         'address',
@@ -36,7 +36,7 @@ const buildParaSwapLiquiditySwapParams = (assetToSwapTo, minAmountToReceive, swa
 };
 class Pool extends BaseService_1.default {
     constructor(provider, lendingPoolConfig) {
-        super(provider, IPool__factory_1.IPool__factory);
+        super(provider, Pool__factory_1.Pool__factory);
         const { POOL, FLASH_LIQUIDATION_ADAPTER, REPAY_WITH_COLLATERAL_ADAPTER, SWAP_COLLATERAL_ADAPTER, WETH_GATEWAY, L2_ENCODER, } = lendingPoolConfig !== null && lendingPoolConfig !== void 0 ? lendingPoolConfig : {};
         this.poolAddress = POOL !== null && POOL !== void 0 ? POOL : '';
         this.flashLiquidationAddress = FLASH_LIQUIDATION_ADAPTER !== null && FLASH_LIQUIDATION_ADAPTER !== void 0 ? FLASH_LIQUIDATION_ADAPTER : '';
@@ -746,7 +746,7 @@ class Pool extends BaseService_1.default {
             }, txs);
         }
         const txCallback = this.generateTxCallback({
-            rawTxMethod: async () => populateTransaction.repayWithATokens(reserve, convertedAmount, numericRateMode),
+            rawTxMethod: async () => populateTransaction.repayWithHTokens(reserve, convertedAmount, numericRateMode),
             from: user,
             value: (0, utils_1.getTxValue)(reserve, convertedAmount),
         });
