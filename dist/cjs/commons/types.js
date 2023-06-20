@@ -32,6 +32,7 @@ exports.ChainIdToNetwork = {
     11155111: 'sepolia',
     534353: 'scroll_alpha',
     1088: 'metis_andromeda',
+    1337: 'hope'
 };
 var ChainId;
 (function (ChainId) {
@@ -59,6 +60,7 @@ var ChainId;
     ChainId[ChainId["sepolia"] = 11155111] = "sepolia";
     ChainId[ChainId["scroll_alpha"] = 534353] = "scroll_alpha";
     ChainId[ChainId["metis_andromeda"] = 1088] = "metis_andromeda";
+    ChainId[ChainId["hope"] = 1337] = "hope";
 })(ChainId = exports.ChainId || (exports.ChainId = {}));
 var eEthereumTxType;
 (function (eEthereumTxType) {

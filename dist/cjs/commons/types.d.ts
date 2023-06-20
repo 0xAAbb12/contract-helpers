@@ -33,7 +33,8 @@ export declare enum ChainId {
     zkevm_testnet = 1402,
     sepolia = 11155111,
     scroll_alpha = 534353,
-    metis_andromeda = 1088
+    metis_andromeda = 1088,
+    hope = 1337
 }
 export declare type ConstantAddressesByNetwork = Record<string, {
     SYNTHETIX_PROXY_ADDRESS?: tEthereumAddress;
