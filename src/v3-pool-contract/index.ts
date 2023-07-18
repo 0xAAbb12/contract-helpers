@@ -332,7 +332,6 @@ export class Pool extends BaseService<IPool> implements PoolInterface {
       approveToZero,
     }: LPSupplyParamsType,
   ): Promise<EthereumTransactionTypeExtended[]> {
-    console.log("11111")
     if (reserve.toLowerCase() === API_ETH_MOCK_ADDRESS.toLowerCase()) {
       return this.wethGatewayService.depositETH({
         lendingPool: this.poolAddress,
@@ -348,7 +347,6 @@ export class Pool extends BaseService<IPool> implements PoolInterface {
     const txs: EthereumTransactionTypeExtended[] = [];
     const reserveDecimals: number = await decimalsOf(reserve);
     const convertedAmount: string = valueToWei(amount, reserveDecimals);
-    console.log("22222", reserveDecimals, convertedAmount)
 
     const fundsAvailable: boolean =
       await this.synthetixService.synthetixValidation({
@@ -356,7 +354,6 @@ export class Pool extends BaseService<IPool> implements PoolInterface {
         reserve,
         amount: convertedAmount,
       });
-    console.log("33333", fundsAvailable)
     if (!fundsAvailable) {
       throw new Error('Not enough funds to execute operation');
     }
@@ -372,11 +369,18 @@ export class Pool extends BaseService<IPool> implements PoolInterface {
     if (!approved) {
       let approveAmount = 0;
       if (approveToZero) {
-        approveAmount = await approvedAmount({
-          token: reserve,
-          user,
-          spender: this.poolAddress,
-        });
+        try {
+          console.log("approveAmount-approvedAmount", reserve)
+          console.log("approveAmount-user", user)
+          console.log("approveAmount-poolAddress", this.poolAddress)
+          approveAmount = await approvedAmount({
+            token: reserve,
+            user,
+            spender: this.poolAddress,
+          });
+        } catch (error) {
+          console.log("approveAmount-poolAddress-error", error)
+        }
       }
       console.log("approveAmount", approveAmount)
       console.log("approveAmount-amount", approveAmount > 0 ? '0' : DEFAULT_APPROVE_AMOUNT)

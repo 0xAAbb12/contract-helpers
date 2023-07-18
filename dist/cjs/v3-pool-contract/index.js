@@ -108,7 +108,6 @@ class Pool extends BaseService_1.default {
         return txs;
     }
     async supply({ user, reserve, amount, onBehalfOf, referralCode, useOptimizedPath, approveToZero, }) {
-        console.log("11111");
         if (reserve.toLowerCase() === utils_1.API_ETH_MOCK_ADDRESS.toLowerCase()) {
             return this.wethGatewayService.depositETH({
                 lendingPool: this.poolAddress,
@@ -122,13 +121,11 @@ class Pool extends BaseService_1.default {
         const txs = [];
         const reserveDecimals = await decimalsOf(reserve);
         const convertedAmount = (0, utils_1.valueToWei)(amount, reserveDecimals);
-        console.log("22222", reserveDecimals, convertedAmount);
         const fundsAvailable = await this.synthetixService.synthetixValidation({
             user,
             reserve,
             amount: convertedAmount,
         });
-        console.log("33333", fundsAvailable);
         if (!fundsAvailable) {
             throw new Error('Not enough funds to execute operation');
         }
@@ -143,11 +140,19 @@ class Pool extends BaseService_1.default {
         if (!approved) {
             let approveAmount = 0;
             if (approveToZero) {
-                approveAmount = await approvedAmount({
-                    token: reserve,
-                    user,
-                    spender: this.poolAddress,
-                });
+                try {
+                    console.log("approveAmount-approvedAmount", reserve);
+                    console.log("approveAmount-user", user);
+                    console.log("approveAmount-poolAddress", this.poolAddress);
+                    approveAmount = await approvedAmount({
+                        token: reserve,
+                        user,
+                        spender: this.poolAddress,
+                    });
+                }
+                catch (error) {
+                    console.log("approveAmount-poolAddress-error", error);
+                }
             }
             console.log("approveAmount", approveAmount);
             console.log("approveAmount-amount", approveAmount > 0 ? '0' : utils_1.DEFAULT_APPROVE_AMOUNT);
