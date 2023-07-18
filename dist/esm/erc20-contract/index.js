@@ -154,7 +154,6 @@ export class ERC20Service extends BaseService {
     }
 }
 __decorate([
-    ERC20Validator,
     __param(0, isEthAddress('user')),
     __param(0, isEthAddress('token')),
     __param(0, isEthAddress('spender')),

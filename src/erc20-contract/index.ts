@@ -93,7 +93,6 @@ export class ERC20Service
    * @param {string} amount - Amount to approve
    * @returns {EthereumTransactionTypeExtended} legacy transaction response
    */
-  @ERC20Validator
   public approve(
     @isEthAddress('user')
     @isEthAddress('token')

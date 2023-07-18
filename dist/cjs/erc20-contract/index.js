@@ -157,7 +157,6 @@ class ERC20Service extends BaseService_1.default {
     }
 }
 tslib_1.__decorate([
-    methodValidators_1.ERC20Validator,
     tslib_1.__param(0, (0, paramValidators_1.isEthAddress)('user')),
     tslib_1.__param(0, (0, paramValidators_1.isEthAddress)('token')),
     tslib_1.__param(0, (0, paramValidators_1.isEthAddress)('spender')),
