@@ -144,22 +144,14 @@ class Pool extends BaseService_1.default {
                     spender: this.poolAddress,
                 });
             }
-            console.log("approveAmount", approveAmount);
-            console.log("approveAmount-amount", approveAmount > 0 ? '0' : utils_1.DEFAULT_APPROVE_AMOUNT);
-            try {
-                console.log("approveAmount-approveToZero", approveToZero);
-                const approveTx = approve({
-                    user,
-                    token: reserve,
-                    spender: this.poolAddress,
-                    amount: approveAmount > 0 ? '0' : utils_1.DEFAULT_APPROVE_AMOUNT,
-                    approveAmount: approveToZero ? approveAmount : undefined,
-                });
-                txs.push(approveTx);
-            }
-            catch (error) {
-                console.log("error", error);
-            }
+            const approveTx = approve({
+                user,
+                token: reserve,
+                spender: this.poolAddress,
+                amount: approveAmount > 0 ? '0' : utils_1.DEFAULT_APPROVE_AMOUNT,
+                approveAmount: approveToZero ? approveAmount : undefined,
+            });
+            txs.push(approveTx);
         }
         const lendingPoolContract = this.getContractInstance(this.poolAddress);
         // use optimized path
