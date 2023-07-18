@@ -10,6 +10,7 @@ export declare type LPSupplyParamsType = {
     referralCode?: string;
     useOptimizedPath?: boolean;
     encodedTxData?: string;
+    approveToZero?: boolean;
 };
 export declare type LPSignedSupplyParamsType = LPSupplyParamsType & {
     signature: string;
@@ -41,6 +42,7 @@ export declare type LPRepayParamsType = {
     interestRateMode: InterestRate;
     onBehalfOf?: tEthereumAddress;
     useOptimizedPath?: boolean;
+    approveToZero?: boolean;
 };
 export declare type LPSwapBorrowRateMode = {
     user: tEthereumAddress;

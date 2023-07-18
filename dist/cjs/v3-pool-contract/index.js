@@ -107,7 +107,7 @@ class Pool extends BaseService_1.default {
         });
         return txs;
     }
-    async supply({ user, reserve, amount, onBehalfOf, referralCode, useOptimizedPath, }) {
+    async supply({ user, reserve, amount, onBehalfOf, referralCode, useOptimizedPath, approveToZero, }) {
         if (reserve.toLowerCase() === utils_1.API_ETH_MOCK_ADDRESS.toLowerCase()) {
             return this.wethGatewayService.depositETH({
                 lendingPool: this.poolAddress,
@@ -117,7 +117,7 @@ class Pool extends BaseService_1.default {
                 referralCode,
             });
         }
-        const { isApproved, approve, decimalsOf } = this.erc20Service;
+        const { isApproved, approve, decimalsOf, approvedAmount } = this.erc20Service;
         const txs = [];
         const reserveDecimals = await decimalsOf(reserve);
         const convertedAmount = (0, utils_1.valueToWei)(amount, reserveDecimals);
@@ -136,11 +136,19 @@ class Pool extends BaseService_1.default {
             amount,
         });
         if (!approved) {
+            let approveAmount = 0;
+            if (approveToZero) {
+                approveAmount = await approvedAmount({
+                    token: reserve,
+                    user,
+                    spender: this.poolAddress,
+                });
+            }
             const approveTx = approve({
                 user,
                 token: reserve,
                 spender: this.poolAddress,
-                amount: utils_1.DEFAULT_APPROVE_AMOUNT,
+                amount: approveAmount > 0 ? '0' : utils_1.DEFAULT_APPROVE_AMOUNT,
             });
             txs.push(approveTx);
         }
@@ -339,7 +347,7 @@ class Pool extends BaseService_1.default {
             },
         ];
     }
-    async repay({ user, reserve, amount, interestRateMode, onBehalfOf, useOptimizedPath, }) {
+    async repay({ user, reserve, amount, interestRateMode, onBehalfOf, useOptimizedPath, approveToZero, }) {
         if (reserve.toLowerCase() === utils_1.API_ETH_MOCK_ADDRESS.toLowerCase()) {
             return this.wethGatewayService.repayETH({
                 lendingPool: this.poolAddress,
@@ -350,7 +358,7 @@ class Pool extends BaseService_1.default {
             });
         }
         const txs = [];
-        const { isApproved, approve, decimalsOf } = this.erc20Service;
+        const { isApproved, approve, decimalsOf, approvedAmount } = this.erc20Service;
         const poolContract = this.getContractInstance(this.poolAddress);
         const { populateTransaction } = poolContract;
         const numericRateMode = interestRateMode === types_1.InterestRate.Variable ? 2 : 1;
@@ -375,11 +383,19 @@ class Pool extends BaseService_1.default {
             amount,
         });
         if (!approved) {
+            let approveAmount = 0;
+            if (approveToZero) {
+                approveAmount = await approvedAmount({
+                    token: reserve,
+                    user,
+                    spender: this.poolAddress,
+                });
+            }
             const approveTx = approve({
                 user,
                 token: reserve,
                 spender: this.poolAddress,
-                amount: utils_1.DEFAULT_APPROVE_AMOUNT,
+                amount: approveAmount > 0 ? '0' : utils_1.DEFAULT_APPROVE_AMOUNT,
             });
             txs.push(approveTx);
         }

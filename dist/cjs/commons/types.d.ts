@@ -146,6 +146,7 @@ export declare type EthereumTransactionTypeExtended = {
     txType: eEthereumTxType;
     tx: () => Promise<transactionType>;
     gas: GasResponse;
+    approveToZero?: boolean;
 };
 export declare type TransactionGenerationMethod = {
     rawTxMethod: () => Promise<PopulatedTransaction>;

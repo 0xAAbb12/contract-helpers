@@ -104,7 +104,7 @@ export class Pool extends BaseService {
         });
         return txs;
     }
-    async supply({ user, reserve, amount, onBehalfOf, referralCode, useOptimizedPath, }) {
+    async supply({ user, reserve, amount, onBehalfOf, referralCode, useOptimizedPath, approveToZero, }) {
         if (reserve.toLowerCase() === API_ETH_MOCK_ADDRESS.toLowerCase()) {
             return this.wethGatewayService.depositETH({
                 lendingPool: this.poolAddress,
@@ -114,7 +114,7 @@ export class Pool extends BaseService {
                 referralCode,
             });
         }
-        const { isApproved, approve, decimalsOf } = this.erc20Service;
+        const { isApproved, approve, decimalsOf, approvedAmount } = this.erc20Service;
         const txs = [];
         const reserveDecimals = await decimalsOf(reserve);
         const convertedAmount = valueToWei(amount, reserveDecimals);
@@ -133,11 +133,19 @@ export class Pool extends BaseService {
             amount,
         });
         if (!approved) {
+            let approveAmount = 0;
+            if (approveToZero) {
+                approveAmount = await approvedAmount({
+                    token: reserve,
+                    user,
+                    spender: this.poolAddress,
+                });
+            }
             const approveTx = approve({
                 user,
                 token: reserve,
                 spender: this.poolAddress,
-                amount: DEFAULT_APPROVE_AMOUNT,
+                amount: approveAmount > 0 ? '0' : DEFAULT_APPROVE_AMOUNT,
             });
             txs.push(approveTx);
         }
@@ -336,7 +344,7 @@ export class Pool extends BaseService {
             },
         ];
     }
-    async repay({ user, reserve, amount, interestRateMode, onBehalfOf, useOptimizedPath, }) {
+    async repay({ user, reserve, amount, interestRateMode, onBehalfOf, useOptimizedPath, approveToZero, }) {
         if (reserve.toLowerCase() === API_ETH_MOCK_ADDRESS.toLowerCase()) {
             return this.wethGatewayService.repayETH({
                 lendingPool: this.poolAddress,
@@ -347,7 +355,7 @@ export class Pool extends BaseService {
             });
         }
         const txs = [];
-        const { isApproved, approve, decimalsOf } = this.erc20Service;
+        const { isApproved, approve, decimalsOf, approvedAmount } = this.erc20Service;
         const poolContract = this.getContractInstance(this.poolAddress);
         const { populateTransaction } = poolContract;
         const numericRateMode = interestRateMode === InterestRate.Variable ? 2 : 1;
@@ -372,11 +380,19 @@ export class Pool extends BaseService {
             amount,
         });
         if (!approved) {
+            let approveAmount = 0;
+            if (approveToZero) {
+                approveAmount = await approvedAmount({
+                    token: reserve,
+                    user,
+                    spender: this.poolAddress,
+                });
+            }
             const approveTx = approve({
                 user,
                 token: reserve,
                 spender: this.poolAddress,
-                amount: DEFAULT_APPROVE_AMOUNT,
+                amount: approveAmount > 0 ? '0' : DEFAULT_APPROVE_AMOUNT,
             });
             txs.push(approveTx);
         }

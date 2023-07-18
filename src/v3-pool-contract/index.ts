@@ -329,6 +329,7 @@ export class Pool extends BaseService<IPool> implements PoolInterface {
       onBehalfOf,
       referralCode,
       useOptimizedPath,
+      approveToZero,
     }: LPSupplyParamsType,
   ): Promise<EthereumTransactionTypeExtended[]> {
     if (reserve.toLowerCase() === API_ETH_MOCK_ADDRESS.toLowerCase()) {
@@ -341,7 +342,7 @@ export class Pool extends BaseService<IPool> implements PoolInterface {
       });
     }
 
-    const { isApproved, approve, decimalsOf }: IERC20ServiceInterface =
+    const { isApproved, approve, decimalsOf, approvedAmount }: IERC20ServiceInterface =
       this.erc20Service;
     const txs: EthereumTransactionTypeExtended[] = [];
     const reserveDecimals: number = await decimalsOf(reserve);
@@ -365,11 +366,19 @@ export class Pool extends BaseService<IPool> implements PoolInterface {
     });
 
     if (!approved) {
+      let approveAmount = 0;
+      if (approveToZero) {
+        approveAmount = await approvedAmount({
+          token: reserve,
+          user,
+          spender: this.poolAddress,
+        });
+      }
       const approveTx: EthereumTransactionTypeExtended = approve({
         user,
         token: reserve,
         spender: this.poolAddress,
-        amount: DEFAULT_APPROVE_AMOUNT,
+        amount: approveAmount > 0 ? '0' : DEFAULT_APPROVE_AMOUNT,
       });
       txs.push(approveTx);
     }
@@ -730,6 +739,7 @@ export class Pool extends BaseService<IPool> implements PoolInterface {
       interestRateMode,
       onBehalfOf,
       useOptimizedPath,
+      approveToZero,
     }: LPRepayParamsType,
   ): Promise<EthereumTransactionTypeExtended[]> {
     if (reserve.toLowerCase() === API_ETH_MOCK_ADDRESS.toLowerCase()) {
@@ -743,7 +753,7 @@ export class Pool extends BaseService<IPool> implements PoolInterface {
     }
 
     const txs: EthereumTransactionTypeExtended[] = [];
-    const { isApproved, approve, decimalsOf }: IERC20ServiceInterface =
+    const { isApproved, approve, decimalsOf, approvedAmount }: IERC20ServiceInterface =
       this.erc20Service;
 
     const poolContract = this.getContractInstance(this.poolAddress);
@@ -776,11 +786,19 @@ export class Pool extends BaseService<IPool> implements PoolInterface {
     });
 
     if (!approved) {
+      let approveAmount = 0;
+      if (approveToZero) {
+        approveAmount = await approvedAmount({
+          token: reserve,
+          user,
+          spender: this.poolAddress,
+        })
+      }
       const approveTx: EthereumTransactionTypeExtended = approve({
         user,
         token: reserve,
         spender: this.poolAddress,
-        amount: DEFAULT_APPROVE_AMOUNT,
+        amount: approveAmount > 0 ? '0' : DEFAULT_APPROVE_AMOUNT,
       });
       txs.push(approveTx);
     }

@@ -53,12 +53,12 @@ export declare class Pool extends BaseService<IPool> implements PoolInterface {
     readonly l2PoolService: L2PoolInterface;
     constructor(provider: providers.Provider, lendingPoolConfig?: LendingPoolMarketConfigV3);
     deposit({ user, reserve, amount, onBehalfOf, referralCode }: LPSupplyParamsType): Promise<EthereumTransactionTypeExtended[]>;
-    supply({ user, reserve, amount, onBehalfOf, referralCode, useOptimizedPath, }: LPSupplyParamsType): Promise<EthereumTransactionTypeExtended[]>;
+    supply({ user, reserve, amount, onBehalfOf, referralCode, useOptimizedPath, approveToZero, }: LPSupplyParamsType): Promise<EthereumTransactionTypeExtended[]>;
     signERC20Approval({ user, reserve, amount, deadline }: LPSignERC20ApprovalType): Promise<string>;
     supplyWithPermit({ user, reserve, onBehalfOf, amount, referralCode, signature, useOptimizedPath, deadline, }: LPSupplyWithPermitType): Promise<EthereumTransactionTypeExtended[]>;
     withdraw({ user, reserve, amount, onBehalfOf, aTokenAddress, useOptimizedPath, }: LPWithdrawParamsType): Promise<EthereumTransactionTypeExtended[]>;
     borrow({ user, reserve, amount, interestRateMode, debtTokenAddress, onBehalfOf, referralCode, useOptimizedPath, }: LPBorrowParamsType): Promise<EthereumTransactionTypeExtended[]>;
-    repay({ user, reserve, amount, interestRateMode, onBehalfOf, useOptimizedPath, }: LPRepayParamsType): Promise<EthereumTransactionTypeExtended[]>;
+    repay({ user, reserve, amount, interestRateMode, onBehalfOf, useOptimizedPath, approveToZero, }: LPRepayParamsType): Promise<EthereumTransactionTypeExtended[]>;
     repayWithPermit({ user, reserve, amount, interestRateMode, onBehalfOf, signature, useOptimizedPath, deadline, }: LPRepayWithPermitParamsType): Promise<EthereumTransactionTypeExtended[]>;
     swapBorrowRateMode({ user, reserve, interestRateMode, useOptimizedPath }: LPSwapBorrowRateMode): Promise<EthereumTransactionTypeExtended[]>;
     setUsageAsCollateral({ user, reserve, usageAsCollateral, useOptimizedPath, }: LPSetUsageAsCollateral): Promise<EthereumTransactionTypeExtended[]>;
