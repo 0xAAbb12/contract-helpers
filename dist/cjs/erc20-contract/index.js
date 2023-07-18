@@ -30,7 +30,7 @@ class ERC20Service extends BaseService_1.default {
      * @param {string} amount - Amount to approve
      * @returns {EthereumTransactionTypeExtended} legacy transaction response
      */
-    approve({ user, token, spender, amount }) {
+    approve({ user, token, spender, amount, approveAmount }) {
         const erc20Contract = this.getContractInstance(token);
         const txCallback = this.generateTxCallback({
             rawTxMethod: async () => erc20Contract.populateTransaction.approve(spender, amount),
@@ -40,6 +40,7 @@ class ERC20Service extends BaseService_1.default {
             tx: txCallback,
             txType: types_1.eEthereumTxType.ERC20_APPROVAL,
             gas: this.generateTxPriceEstimation([], txCallback),
+            approveAmount,
         };
     }
     /**

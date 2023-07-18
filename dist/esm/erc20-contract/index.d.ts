@@ -21,6 +21,7 @@ export declare type AllowanceRequest = TokenOwner & {
 };
 export declare type ApproveType = AllowanceRequest & {
     amount: string;
+    approveAmount?: number;
 };
 export declare type SignedApproveType = ApproveType & {
     deadline?: string;
@@ -44,7 +45,7 @@ export declare class ERC20Service extends BaseService<IERC20Detailed> implements
      * @param {string} amount - Amount to approve
      * @returns {EthereumTransactionTypeExtended} legacy transaction response
      */
-    approve({ user, token, spender, amount }: ApproveType): EthereumTransactionTypeExtended;
+    approve({ user, token, spender, amount, approveAmount }: ApproveType): EthereumTransactionTypeExtended;
     /**
      * Generate approval tx data, ready to sign and submit to blockchain
      * @param {string} user - Address to check allowance for

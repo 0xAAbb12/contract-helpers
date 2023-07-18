@@ -132,32 +132,20 @@ export class Pool extends BaseService {
             spender: this.poolAddress,
             amount,
         });
-        console.log("approveAmount-approved", approved);
-        console.log("approveAmount-amount", amount);
+        const approveAmount = await approvedAmount({
+            token: reserve,
+            user,
+            spender: this.poolAddress,
+        });
         if (!approved) {
-            let approveAmount = 0;
-            if (approveToZero) {
-                try {
-                    console.log("approveAmount-approvedAmount", reserve);
-                    console.log("approveAmount-user", user);
-                    console.log("approveAmount-poolAddress", this.poolAddress);
-                    approveAmount = await approvedAmount({
-                        token: reserve,
-                        user,
-                        spender: this.poolAddress,
-                    });
-                }
-                catch (error) {
-                    console.log("approveAmount-poolAddress-error", error);
-                }
-            }
             console.log("approveAmount", approveAmount);
             console.log("approveAmount-amount", approveAmount > 0 ? '0' : DEFAULT_APPROVE_AMOUNT);
             const approveTx = approve({
                 user,
                 token: reserve,
                 spender: this.poolAddress,
-                amount: approveAmount > 0 ? '0' : DEFAULT_APPROVE_AMOUNT,
+                amount: approveToZero && approveAmount > 0 ? '0' : DEFAULT_APPROVE_AMOUNT,
+                approveAmount: approveToZero ? approveAmount : undefined,
             });
             txs.push(approveTx);
         }
@@ -391,20 +379,18 @@ export class Pool extends BaseService {
             spender: this.poolAddress,
             amount,
         });
+        const approveAmount = await approvedAmount({
+            token: reserve,
+            user,
+            spender: this.poolAddress,
+        });
         if (!approved) {
-            let approveAmount = 0;
-            if (approveToZero) {
-                approveAmount = await approvedAmount({
-                    token: reserve,
-                    user,
-                    spender: this.poolAddress,
-                });
-            }
             const approveTx = approve({
                 user,
                 token: reserve,
                 spender: this.poolAddress,
-                amount: approveAmount > 0 ? '0' : DEFAULT_APPROVE_AMOUNT,
+                amount: approveToZero && approveAmount > 0 ? '0' : DEFAULT_APPROVE_AMOUNT,
+                approveAmount: approveToZero ? approveAmount : undefined,
             });
             txs.push(approveTx);
         }

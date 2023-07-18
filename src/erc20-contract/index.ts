@@ -49,6 +49,7 @@ export type AllowanceRequest = TokenOwner & {
 
 export type ApproveType = AllowanceRequest & {
   amount: string;
+  approveAmount?: number
 };
 
 export type SignedApproveType = ApproveType & {
@@ -63,8 +64,7 @@ export type TokenMetadataType = {
 };
 export class ERC20Service
   extends BaseService<IERC20Detailed>
-  implements IERC20ServiceInterface
-{
+  implements IERC20ServiceInterface {
   readonly tokenDecimals: Record<string, number>;
 
   readonly tokenMetadata: Record<string, TokenMetadataType>;
@@ -98,7 +98,7 @@ export class ERC20Service
     @isEthAddress('token')
     @isEthAddress('spender')
     @isPositiveAmount('amount')
-    { user, token, spender, amount }: ApproveType,
+    { user, token, spender, amount, approveAmount }: ApproveType,
   ): EthereumTransactionTypeExtended {
     const erc20Contract: IERC20Detailed = this.getContractInstance(token);
 
@@ -112,6 +112,7 @@ export class ERC20Service
       tx: txCallback,
       txType: eEthereumTxType.ERC20_APPROVAL,
       gas: this.generateTxPriceEstimation([], txCallback),
+      approveAmount,
     };
   }
 
@@ -177,11 +178,11 @@ export class ERC20Service
       amount === '-1'
         ? BigNumber.from(SUPER_BIG_ALLOWANCE_NUMBER)
         : BigNumber.from(
-            valueToWei(
-              nativeDecimals ? formatUnits(amount, decimals) : amount,
-              decimals,
-            ),
-          );
+          valueToWei(
+            nativeDecimals ? formatUnits(amount, decimals) : amount,
+            decimals,
+          ),
+        );
     return allowance.gte(amountBNWithDecimals);
   }
 
