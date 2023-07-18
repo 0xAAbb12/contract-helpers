@@ -332,6 +332,7 @@ export class Pool extends BaseService<IPool> implements PoolInterface {
       approveToZero,
     }: LPSupplyParamsType,
   ): Promise<EthereumTransactionTypeExtended[]> {
+    console.log("11111")
     if (reserve.toLowerCase() === API_ETH_MOCK_ADDRESS.toLowerCase()) {
       return this.wethGatewayService.depositETH({
         lendingPool: this.poolAddress,
@@ -347,6 +348,7 @@ export class Pool extends BaseService<IPool> implements PoolInterface {
     const txs: EthereumTransactionTypeExtended[] = [];
     const reserveDecimals: number = await decimalsOf(reserve);
     const convertedAmount: string = valueToWei(amount, reserveDecimals);
+    console.log("22222", reserveDecimals, convertedAmount)
 
     const fundsAvailable: boolean =
       await this.synthetixService.synthetixValidation({
@@ -354,6 +356,7 @@ export class Pool extends BaseService<IPool> implements PoolInterface {
         reserve,
         amount: convertedAmount,
       });
+    console.log("33333", fundsAvailable)
     if (!fundsAvailable) {
       throw new Error('Not enough funds to execute operation');
     }
