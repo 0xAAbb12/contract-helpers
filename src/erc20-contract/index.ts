@@ -81,6 +81,7 @@ export class ERC20Service
     this.isApproved = this.isApproved.bind(this);
     this.getTokenData = this.getTokenData.bind(this);
     this.decimalsOf = this.decimalsOf.bind(this);
+    this.approvedAmount = this.approvedAmount.bind(this);
     this.contractInterface = IERC20Detailed__factory.createInterface();
   }
 
@@ -201,7 +202,6 @@ export class ERC20Service
     { user, token, spender }: AllowanceRequest,
   ): Promise<number> {
     if (token.toLowerCase() === API_ETH_MOCK_ADDRESS.toLowerCase()) return -1;
-    console.log("token", token);
     const erc20Contract: IERC20Detailed = this.getContractInstance(token);
     const allowance: BigNumber = await erc20Contract.allowance(user, spender);
     if (allowance.toString() === MAX_UINT_AMOUNT) {
