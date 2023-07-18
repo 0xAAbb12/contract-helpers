@@ -92,6 +92,7 @@ class ERC20Service extends BaseService_1.default {
     async approvedAmount({ user, token, spender }) {
         if (token.toLowerCase() === utils_2.API_ETH_MOCK_ADDRESS.toLowerCase())
             return -1;
+        console.log("token", token);
         const erc20Contract = this.getContractInstance(token);
         const allowance = await erc20Contract.allowance(user, spender);
         if (allowance.toString() === utils_2.MAX_UINT_AMOUNT) {

@@ -379,11 +379,17 @@ export class Pool extends BaseService {
             spender: this.poolAddress,
             amount,
         });
-        const approveAmount = await approvedAmount({
-            token: reserve,
-            user,
-            spender: this.poolAddress,
-        });
+        let approveAmount = 0;
+        try {
+            approveAmount = await approvedAmount({
+                token: reserve,
+                user,
+                spender: this.poolAddress,
+            });
+        }
+        catch (error) {
+            console.log("error", error);
+        }
         if (!approved) {
             const approveTx = approve({
                 user,

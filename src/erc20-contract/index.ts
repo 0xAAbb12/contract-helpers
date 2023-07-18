@@ -201,6 +201,7 @@ export class ERC20Service
     { user, token, spender }: AllowanceRequest,
   ): Promise<number> {
     if (token.toLowerCase() === API_ETH_MOCK_ADDRESS.toLowerCase()) return -1;
+    console.log("token", token);
     const erc20Contract: IERC20Detailed = this.getContractInstance(token);
     const allowance: BigNumber = await erc20Contract.allowance(user, spender);
     if (allowance.toString() === MAX_UINT_AMOUNT) {
