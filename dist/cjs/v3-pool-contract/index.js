@@ -135,6 +135,8 @@ class Pool extends BaseService_1.default {
             spender: this.poolAddress,
             amount,
         });
+        console.log("approveAmount-approved", approved);
+        console.log("approveAmount-amount", amount);
         if (!approved) {
             let approveAmount = 0;
             if (approveToZero) {
