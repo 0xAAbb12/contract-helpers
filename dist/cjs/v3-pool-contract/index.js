@@ -144,6 +144,8 @@ class Pool extends BaseService_1.default {
                     spender: this.poolAddress,
                 });
             }
+            console.log("approveAmount", approveAmount);
+            console.log("approveAmount-amount", approveAmount > 0 ? '0' : utils_1.DEFAULT_APPROVE_AMOUNT);
             const approveTx = approve({
                 user,
                 token: reserve,

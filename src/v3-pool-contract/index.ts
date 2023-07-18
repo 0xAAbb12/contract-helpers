@@ -374,6 +374,8 @@ export class Pool extends BaseService<IPool> implements PoolInterface {
           spender: this.poolAddress,
         });
       }
+      console.log("approveAmount", approveAmount)
+      console.log("approveAmount-amount", approveAmount > 0 ? '0' : DEFAULT_APPROVE_AMOUNT)
       const approveTx: EthereumTransactionTypeExtended = approve({
         user,
         token: reserve,

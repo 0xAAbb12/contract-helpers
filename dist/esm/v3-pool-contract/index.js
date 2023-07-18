@@ -141,6 +141,8 @@ export class Pool extends BaseService {
                     spender: this.poolAddress,
                 });
             }
+            console.log("approveAmount", approveAmount);
+            console.log("approveAmount-amount", approveAmount > 0 ? '0' : DEFAULT_APPROVE_AMOUNT);
             const approveTx = approve({
                 user,
                 token: reserve,
