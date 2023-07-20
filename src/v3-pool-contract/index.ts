@@ -736,6 +736,7 @@ export class Pool extends BaseService<IPool> implements PoolInterface {
       user,
       reserve,
       amount,
+      approveAmount,
       interestRateMode,
       onBehalfOf,
       useOptimizedPath,
@@ -782,7 +783,7 @@ export class Pool extends BaseService<IPool> implements PoolInterface {
       token: reserve,
       user,
       spender: this.poolAddress,
-      amount,
+      amount: approveAmount || amount,
     });
     console.log("approved", approved)
     console.log("approveToZero", approveToZero)

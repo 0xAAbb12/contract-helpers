@@ -348,7 +348,7 @@ class Pool extends BaseService_1.default {
             },
         ];
     }
-    async repay({ user, reserve, amount, interestRateMode, onBehalfOf, useOptimizedPath, approveToZero, }) {
+    async repay({ user, reserve, amount, approveAmount, interestRateMode, onBehalfOf, useOptimizedPath, approveToZero, }) {
         if (reserve.toLowerCase() === utils_1.API_ETH_MOCK_ADDRESS.toLowerCase()) {
             return this.wethGatewayService.repayETH({
                 lendingPool: this.poolAddress,
@@ -381,7 +381,7 @@ class Pool extends BaseService_1.default {
             token: reserve,
             user,
             spender: this.poolAddress,
-            amount,
+            amount: approveAmount || amount,
         });
         console.log("approved", approved);
         console.log("approveToZero", approveToZero);

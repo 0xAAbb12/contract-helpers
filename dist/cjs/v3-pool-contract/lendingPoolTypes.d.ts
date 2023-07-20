@@ -39,6 +39,7 @@ export declare type LPRepayParamsType = {
     user: tEthereumAddress;
     reserve: tEthereumAddress;
     amount: string;
+    approveAmount?: string;
     interestRateMode: InterestRate;
     onBehalfOf?: tEthereumAddress;
     useOptimizedPath?: boolean;

@@ -58,7 +58,7 @@ export declare class Pool extends BaseService<IPool> implements PoolInterface {
     supplyWithPermit({ user, reserve, onBehalfOf, amount, referralCode, signature, useOptimizedPath, deadline, }: LPSupplyWithPermitType): Promise<EthereumTransactionTypeExtended[]>;
     withdraw({ user, reserve, amount, onBehalfOf, aTokenAddress, useOptimizedPath, }: LPWithdrawParamsType): Promise<EthereumTransactionTypeExtended[]>;
     borrow({ user, reserve, amount, interestRateMode, debtTokenAddress, onBehalfOf, referralCode, useOptimizedPath, }: LPBorrowParamsType): Promise<EthereumTransactionTypeExtended[]>;
-    repay({ user, reserve, amount, interestRateMode, onBehalfOf, useOptimizedPath, approveToZero, }: LPRepayParamsType): Promise<EthereumTransactionTypeExtended[]>;
+    repay({ user, reserve, amount, approveAmount, interestRateMode, onBehalfOf, useOptimizedPath, approveToZero, }: LPRepayParamsType): Promise<EthereumTransactionTypeExtended[]>;
     repayWithPermit({ user, reserve, amount, interestRateMode, onBehalfOf, signature, useOptimizedPath, deadline, }: LPRepayWithPermitParamsType): Promise<EthereumTransactionTypeExtended[]>;
     swapBorrowRateMode({ user, reserve, interestRateMode, useOptimizedPath }: LPSwapBorrowRateMode): Promise<EthereumTransactionTypeExtended[]>;
     setUsageAsCollateral({ user, reserve, usageAsCollateral, useOptimizedPath, }: LPSetUsageAsCollateral): Promise<EthereumTransactionTypeExtended[]>;
