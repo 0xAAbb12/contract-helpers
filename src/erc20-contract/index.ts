@@ -183,6 +183,8 @@ export class ERC20Service
             decimals,
           ),
         );
+    console.log("allowance", allowance.toString())
+    console.log("amountBNWithDecimals", amountBNWithDecimals.toString())
     return allowance.gte(amountBNWithDecimals);
   }
 

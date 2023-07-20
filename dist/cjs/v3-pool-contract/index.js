@@ -383,6 +383,8 @@ class Pool extends BaseService_1.default {
             spender: this.poolAddress,
             amount,
         });
+        console.log("approved", approved);
+        console.log("approveToZero", approveToZero);
         if (!approved) {
             let approveAmount = 0;
             if (approveToZero) {
@@ -391,6 +393,7 @@ class Pool extends BaseService_1.default {
                     user,
                     spender: this.poolAddress,
                 });
+                console.log("approveAmount", approveAmount);
             }
             const approveTx = approve({
                 user,

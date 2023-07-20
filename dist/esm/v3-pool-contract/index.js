@@ -380,6 +380,8 @@ export class Pool extends BaseService {
             spender: this.poolAddress,
             amount,
         });
+        console.log("approved", approved);
+        console.log("approveToZero", approveToZero);
         if (!approved) {
             let approveAmount = 0;
             if (approveToZero) {
@@ -388,6 +390,7 @@ export class Pool extends BaseService {
                     user,
                     spender: this.poolAddress,
                 });
+                console.log("approveAmount", approveAmount);
             }
             const approveTx = approve({
                 user,

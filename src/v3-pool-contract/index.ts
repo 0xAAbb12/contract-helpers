@@ -784,6 +784,8 @@ export class Pool extends BaseService<IPool> implements PoolInterface {
       spender: this.poolAddress,
       amount,
     });
+    console.log("approved", approved)
+    console.log("approveToZero", approveToZero)
     if (!approved) {
       let approveAmount = 0;
       if (approveToZero) {
@@ -792,6 +794,7 @@ export class Pool extends BaseService<IPool> implements PoolInterface {
           user,
           spender: this.poolAddress,
         })
+        console.log("approveAmount", approveAmount)
       }
       const approveTx: EthereumTransactionTypeExtended = approve({
         user,
