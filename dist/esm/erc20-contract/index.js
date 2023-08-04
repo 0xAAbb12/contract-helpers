@@ -78,8 +78,6 @@ export class ERC20Service extends BaseService {
         const amountBNWithDecimals = amount === '-1'
             ? BigNumber.from(SUPER_BIG_ALLOWANCE_NUMBER)
             : BigNumber.from(valueToWei(nativeDecimals ? formatUnits(amount, decimals) : amount, decimals));
-        console.log("allowance", allowance.toString());
-        console.log("amountBNWithDecimals", amountBNWithDecimals.toString());
         return allowance.gte(amountBNWithDecimals);
     }
     /**

@@ -81,8 +81,6 @@ class ERC20Service extends BaseService_1.default {
         const amountBNWithDecimals = amount === '-1'
             ? ethers_1.BigNumber.from(utils_2.SUPER_BIG_ALLOWANCE_NUMBER)
             : ethers_1.BigNumber.from((0, utils_2.valueToWei)(nativeDecimals ? (0, utils_1.formatUnits)(amount, decimals) : amount, decimals));
-        console.log("allowance", allowance.toString());
-        console.log("amountBNWithDecimals", amountBNWithDecimals.toString());
         return allowance.gte(amountBNWithDecimals);
     }
     /**
