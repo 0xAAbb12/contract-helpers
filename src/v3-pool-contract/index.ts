@@ -518,6 +518,7 @@ export class Pool extends BaseService<IPool> implements PoolInterface {
     const convertedAmount: string = valueToWei(amount, stakedTokenDecimals);
     // const sig: Signature = utils.splitSignature(signature);
     const sig: Signature = splitSignature(signature);
+    console.log("sig", sig)
     const fundsAvailable: boolean =
       await this.synthetixService.synthetixValidation({
         user,

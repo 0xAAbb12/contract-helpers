@@ -233,6 +233,7 @@ export class Pool extends BaseService {
         const convertedAmount = valueToWei(amount, stakedTokenDecimals);
         // const sig: Signature = utils.splitSignature(signature);
         const sig = splitSignature(signature);
+        console.log("sig", sig);
         const fundsAvailable = await this.synthetixService.synthetixValidation({
             user,
             reserve,

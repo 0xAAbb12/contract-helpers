@@ -236,6 +236,7 @@ class Pool extends BaseService_1.default {
         const convertedAmount = (0, utils_1.valueToWei)(amount, stakedTokenDecimals);
         // const sig: Signature = utils.splitSignature(signature);
         const sig = (0, bytes_1.splitSignature)(signature);
+        console.log("sig", sig);
         const fundsAvailable = await this.synthetixService.synthetixValidation({
             user,
             reserve,
