@@ -458,7 +458,7 @@ export class Pool extends BaseService<IPool> implements PoolInterface {
     if (nonce === null) {
       return '';
     }
-
+    console.log("version", version)
     const typeData = {
       types: {
         EIP712Domain: [
@@ -490,6 +490,7 @@ export class Pool extends BaseService<IPool> implements PoolInterface {
         deadline,
       },
     };
+    console.log("typeData", typeData)
     return JSON.stringify(typeData);
   }
 
