@@ -192,7 +192,6 @@ export class Pool extends BaseService {
         if (nonce === null) {
             return '';
         }
-        console.log("version", version);
         const typeData = {
             types: {
                 EIP712Domain: [
@@ -224,7 +223,6 @@ export class Pool extends BaseService {
                 deadline,
             },
         };
-        console.log("typeData", typeData);
         return JSON.stringify(typeData);
     }
     async supplyWithPermit({ user, reserve, onBehalfOf, amount, referralCode, signature, useOptimizedPath, deadline, }) {
