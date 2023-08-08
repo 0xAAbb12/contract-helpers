@@ -169,7 +169,7 @@ export class Pool extends BaseService {
         return txs;
     }
     // Sign permit supply
-    async signERC20Approval({ user, reserve, amount, deadline }) {
+    async signERC20Approval({ user, reserve, amount, deadline, version }) {
         const { getTokenData, isApproved } = this.erc20Service;
         const { name, decimals } = await getTokenData(reserve);
         const convertedAmount = amount === '-1'
@@ -211,7 +211,7 @@ export class Pool extends BaseService {
             primaryType: 'Permit',
             domain: {
                 name,
-                version: '1',
+                version: version || '1',
                 chainId,
                 verifyingContract: reserve,
             },
@@ -381,8 +381,6 @@ export class Pool extends BaseService {
             spender: this.poolAddress,
             amount: approveAmount || amount,
         });
-        console.log("approved", approved);
-        console.log("approveToZero", approveToZero);
         if (!approved) {
             let approveAmount = 0;
             if (approveToZero) {
@@ -391,7 +389,6 @@ export class Pool extends BaseService {
                     user,
                     spender: this.poolAddress,
                 });
-                console.log("approveAmount", approveAmount);
             }
             const approveTx = approve({
                 user,

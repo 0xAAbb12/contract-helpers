@@ -139,6 +139,7 @@ export declare type LPSignERC20ApprovalType = {
     reserve: tEthereumAddress;
     amount: string;
     deadline: string;
+    version?: string;
 };
 export declare type LPSetUserEModeType = {
     user: string;

@@ -54,7 +54,7 @@ export declare class Pool extends BaseService<IPool> implements PoolInterface {
     constructor(provider: providers.Provider, lendingPoolConfig?: LendingPoolMarketConfigV3);
     deposit({ user, reserve, amount, onBehalfOf, referralCode }: LPSupplyParamsType): Promise<EthereumTransactionTypeExtended[]>;
     supply({ user, reserve, amount, onBehalfOf, referralCode, useOptimizedPath, approveToZero, }: LPSupplyParamsType): Promise<EthereumTransactionTypeExtended[]>;
-    signERC20Approval({ user, reserve, amount, deadline }: LPSignERC20ApprovalType): Promise<string>;
+    signERC20Approval({ user, reserve, amount, deadline, version }: LPSignERC20ApprovalType): Promise<string>;
     supplyWithPermit({ user, reserve, onBehalfOf, amount, referralCode, signature, useOptimizedPath, deadline, }: LPSupplyWithPermitType): Promise<EthereumTransactionTypeExtended[]>;
     withdraw({ user, reserve, amount, onBehalfOf, aTokenAddress, useOptimizedPath, }: LPWithdrawParamsType): Promise<EthereumTransactionTypeExtended[]>;
     borrow({ user, reserve, amount, interestRateMode, debtTokenAddress, onBehalfOf, referralCode, useOptimizedPath, }: LPBorrowParamsType): Promise<EthereumTransactionTypeExtended[]>;

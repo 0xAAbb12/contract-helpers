@@ -427,7 +427,7 @@ export class Pool extends BaseService<IPool> implements PoolInterface {
     @isEthAddress('user')
     @isEthAddress('reserve')
     @isPositiveOrMinusOneAmount('amount')
-    { user, reserve, amount, deadline }: LPSignERC20ApprovalType,
+    { user, reserve, amount, deadline, version }: LPSignERC20ApprovalType,
   ): Promise<string> {
     const { getTokenData, isApproved } = this.erc20Service;
     const { name, decimals } = await getTokenData(reserve);
@@ -478,7 +478,7 @@ export class Pool extends BaseService<IPool> implements PoolInterface {
       primaryType: 'Permit',
       domain: {
         name,
-        version: '1',
+        version: version || '1',
         chainId,
         verifyingContract: reserve,
       },
@@ -786,8 +786,6 @@ export class Pool extends BaseService<IPool> implements PoolInterface {
       spender: this.poolAddress,
       amount: approveAmount || amount,
     });
-    console.log("approved", approved)
-    console.log("approveToZero", approveToZero)
     if (!approved) {
       let approveAmount = 0;
       if (approveToZero) {
@@ -796,7 +794,6 @@ export class Pool extends BaseService<IPool> implements PoolInterface {
           user,
           spender: this.poolAddress,
         })
-        console.log("approveAmount", approveAmount)
       }
       const approveTx: EthereumTransactionTypeExtended = approve({
         user,
