@@ -20,6 +20,7 @@ export declare enum ChainId {
     mumbai = 80001,
     avalanche = 43114,
     fuji = 43113,
+    arbitrum = 42161,
     arbitrum_one = 42161,
     arbitrum_rinkeby = 421611,
     arbitrum_goerli = 421613,
@@ -34,7 +35,9 @@ export declare enum ChainId {
     sepolia = 11155111,
     scroll_alpha = 534353,
     metis_andromeda = 1088,
-    hope = 1337
+    hope = 1337,
+    base = 8453,
+    base_goerli = 84531
 }
 export declare type ConstantAddressesByNetwork = Record<string, {
     SYNTHETIX_PROXY_ADDRESS?: tEthereumAddress;

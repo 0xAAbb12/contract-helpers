@@ -32,7 +32,9 @@ exports.ChainIdToNetwork = {
     11155111: 'sepolia',
     534353: 'scroll_alpha',
     1088: 'metis_andromeda',
-    1337: 'hope'
+    1337: 'hope',
+    8453: 'base',
+    84531: 'base_goerli'
 };
 var ChainId;
 (function (ChainId) {
@@ -46,6 +48,7 @@ var ChainId;
     ChainId[ChainId["mumbai"] = 80001] = "mumbai";
     ChainId[ChainId["avalanche"] = 43114] = "avalanche";
     ChainId[ChainId["fuji"] = 43113] = "fuji";
+    ChainId[ChainId["arbitrum"] = 42161] = "arbitrum";
     ChainId[ChainId["arbitrum_one"] = 42161] = "arbitrum_one";
     ChainId[ChainId["arbitrum_rinkeby"] = 421611] = "arbitrum_rinkeby";
     ChainId[ChainId["arbitrum_goerli"] = 421613] = "arbitrum_goerli";
@@ -61,6 +64,8 @@ var ChainId;
     ChainId[ChainId["scroll_alpha"] = 534353] = "scroll_alpha";
     ChainId[ChainId["metis_andromeda"] = 1088] = "metis_andromeda";
     ChainId[ChainId["hope"] = 1337] = "hope";
+    ChainId[ChainId["base"] = 8453] = "base";
+    ChainId[ChainId["base_goerli"] = 84531] = "base_goerli";
 })(ChainId = exports.ChainId || (exports.ChainId = {}));
 var eEthereumTxType;
 (function (eEthereumTxType) {
