@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PERMISSION_MAP = exports.PERMISSION = void 0;
+exports.factories = exports.typechain = exports.PERMISSION_MAP = exports.PERMISSION = void 0;
 const tslib_1 = require("tslib");
 tslib_1.__exportStar(require("./permissions-manager"), exports);
 var PermissionManagerTypes_1 = require("./permissions-manager/types/PermissionManagerTypes");
@@ -30,6 +30,8 @@ tslib_1.__exportStar(require("./baseDebtToken-contract"), exports);
 tslib_1.__exportStar(require("./v3-migration-contract"), exports);
 tslib_1.__exportStar(require("./erc20-2612"), exports);
 tslib_1.__exportStar(require("./mock-token"), exports);
+exports.typechain = tslib_1.__importStar(require("./types"));
+exports.factories = tslib_1.__importStar(require("./types/factories"));
 // commons
 tslib_1.__exportStar(require("./commons/types"), exports);
 tslib_1.__exportStar(require("./commons/ipfs"), exports);

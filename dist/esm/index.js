@@ -24,6 +24,8 @@ export * from './baseDebtToken-contract';
 export * from './v3-migration-contract';
 export * from './erc20-2612';
 export * from './mock-token';
+export * as typechain from './types';
+export * as factories from './types/factories';
 // commons
 export * from './commons/types';
 export * from './commons/ipfs';
