@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { BridgeOFTGateway } from "./BridgeOFTGateway";
+export type { ERC20 } from "./ERC20";
 export type { Faucet } from "./Faucet";
 export type { GaugeFactory } from "./GaugeFactory";
 export type { ITestnetERC20 } from "./ITestnetERC20";
@@ -11,6 +12,7 @@ export type { Pool } from "./Pool";
 export type { UiPoolDataProvider } from "./UiPoolDataProvider";
 export * as factories from "./factories";
 export { BridgeOFTGateway__factory } from "./factories/BridgeOFTGateway__factory";
+export { ERC20__factory } from "./factories/ERC20__factory";
 export { Faucet__factory } from "./factories/Faucet__factory";
 export { GaugeFactory__factory } from "./factories/GaugeFactory__factory";
 export { ITestnetERC20__factory } from "./factories/ITestnetERC20__factory";

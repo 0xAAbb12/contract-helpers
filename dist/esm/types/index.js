@@ -1,5 +1,6 @@
 export * as factories from "./factories";
 export { BridgeOFTGateway__factory } from "./factories/BridgeOFTGateway__factory";
+export { ERC20__factory } from "./factories/ERC20__factory";
 export { Faucet__factory } from "./factories/Faucet__factory";
 export { GaugeFactory__factory } from "./factories/GaugeFactory__factory";
 export { ITestnetERC20__factory } from "./factories/ITestnetERC20__factory";

@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export { BridgeOFTGateway__factory } from "./BridgeOFTGateway__factory";
+export { ERC20__factory } from "./ERC20__factory";
 export { Faucet__factory } from "./Faucet__factory";
 export { GaugeFactory__factory } from "./GaugeFactory__factory";
 export { ITestnetERC20__factory } from "./ITestnetERC20__factory";

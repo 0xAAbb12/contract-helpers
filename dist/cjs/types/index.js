@@ -1,10 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UiPoolDataProvider__factory = exports.Pool__factory = exports.Minter__factory = exports.LendingGauge__factory = exports.ITestnetERC20__factory = exports.GaugeFactory__factory = exports.Faucet__factory = exports.BridgeOFTGateway__factory = exports.factories = void 0;
+exports.UiPoolDataProvider__factory = exports.Pool__factory = exports.Minter__factory = exports.LendingGauge__factory = exports.ITestnetERC20__factory = exports.GaugeFactory__factory = exports.Faucet__factory = exports.ERC20__factory = exports.BridgeOFTGateway__factory = exports.factories = void 0;
 const tslib_1 = require("tslib");
 exports.factories = tslib_1.__importStar(require("./factories"));
 var BridgeOFTGateway__factory_1 = require("./factories/BridgeOFTGateway__factory");
 Object.defineProperty(exports, "BridgeOFTGateway__factory", { enumerable: true, get: function () { return BridgeOFTGateway__factory_1.BridgeOFTGateway__factory; } });
+var ERC20__factory_1 = require("./factories/ERC20__factory");
+Object.defineProperty(exports, "ERC20__factory", { enumerable: true, get: function () { return ERC20__factory_1.ERC20__factory; } });
 var Faucet__factory_1 = require("./factories/Faucet__factory");
 Object.defineProperty(exports, "Faucet__factory", { enumerable: true, get: function () { return Faucet__factory_1.Faucet__factory; } });
 var GaugeFactory__factory_1 = require("./factories/GaugeFactory__factory");
